@@ -1,0 +1,44 @@
+name: Sync with the latest Hydrogen skeleton
+
+# Re-scaffolds the Hydrogen skeleton from the latest release and opens a PR when
+# anything the skeleton owns has drifted, so galleries never showcase a stale starter.
+on:
+  schedule:
+    - cron: "17 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 22
+      - name: Scaffold the latest skeleton
+        run: |
+          npm create @shopify/hydrogen@latest -- --quickstart --language ts --path /tmp/fresh --no-install-deps --no-shortcut
+          rm -rf /tmp/fresh/.git
+      - name: Copy skeleton-owned files over the starter
+        run: |
+          # Everything the skeleton produces is skeleton-owned except the files this repo adds or rewrites.
+          rsync -a --delete \
+            --exclude README.md --exclude AGENTS.md --exclude CLAUDE.md --exclude llms.txt \
+            --exclude .env --exclude .env.example --exclude LICENSE.md --exclude package-lock.json \
+            --exclude .github --exclude scripts --exclude .cursor/rules/mock-shop.mdc --exclude .git \
+            /tmp/fresh/ ./
+          node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json'));p.name='mock-shop-starter';p.scripts['update-stores']='node scripts/update-store-directory.mjs';fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n')"
+          npm install --package-lock-only --ignore-scripts
+      - name: Open a pull request if anything changed
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
+        with:
+          branch: chore/sync-hydrogen-skeleton
+          title: "Sync with the latest Hydrogen skeleton"
+          commit-message: "Sync with the latest Hydrogen skeleton"
+          body: |
+            Automated re-scaffold from `npm create @shopify/hydrogen@latest`. Review the diff, run it locally, and merge to keep the starter current.
+          labels: dependencies

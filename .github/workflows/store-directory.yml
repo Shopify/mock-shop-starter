@@ -1,0 +1,26 @@
+name: Refresh the store directory
+
+on:
+  schedule:
+    - cron: "43 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 22
+      - run: npm run update-stores
+      - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
+        with:
+          branch: chore/refresh-store-directory
+          title: "Refresh the mock.shop store directory"
+          commit-message: "Refresh the mock.shop store directory"
+          body: "Regenerated from https://mock.shop/llms.txt."
