@@ -1,26 +1,63 @@
-# mock.shop starter
+<div align="center">
 
-A [Hydrogen](https://shopify.dev/docs/storefronts/headless/hydrogen) storefront that works the moment you clone it. No Shopify store, no app, no access token: it reads [mock.shop](https://mock.shop), Shopify's public Storefront API backed by more than 100 fictional stores, each with its own catalog. Pick the store that matches what you're building, and switch to a real Shopify store when you're ready.
+<h1>mock.shop starter</h1>
 
-Built for people and for coding agents. `AGENTS.md`, `llms.txt`, and the Cursor rules in this repo already know how mock.shop works, so your agent does too.
+<p>
+  <strong>A Shopify Hydrogen storefront that runs the moment you clone it.</strong><br>
+  No store. No token. No account. A real Storefront API with more than 100 fictional catalogs to build against.
+</p>
+
+<p>
+  <a href="LICENSE.md"><img alt="MIT license" src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
+  <a href="https://shopify.dev/docs/storefronts/headless/hydrogen"><img alt="Hydrogen 2026.4" src="https://img.shields.io/badge/Hydrogen-2026.4-95BF47?logo=shopify&logoColor=white"></a>
+  <img alt="Node 22 or 24" src="https://img.shields.io/badge/Node-22%20%7C%2024-339933?logo=node.js&logoColor=white">
+</p>
+
+<p>
+  <a href="https://stackblitz.com/github/Shopify/mock-shop-starter"><img alt="Open in StackBlitz" src="https://img.shields.io/badge/Open%20in-StackBlitz-1269D3?logo=stackblitz&logoColor=white"></a>
+  <a href="https://codesandbox.io/s/github/Shopify/mock-shop-starter"><img alt="Open in CodeSandbox" src="https://img.shields.io/badge/Open%20in-CodeSandbox-151515?logo=codesandbox&logoColor=white"></a>
+  <a href="https://bolt.new/github.com/Shopify/mock-shop-starter"><img alt="Open in Bolt" src="https://img.shields.io/badge/Open%20in-Bolt-000000?logo=bolt&logoColor=white"></a>
+</p>
+
+<!-- Deploy with Vercel: GA Hydrogen targets Oxygen. Decision pending on linking Hydrogen's preview Next.js template here. -->
+
+<table>
+  <tr>
+    <td align="center"><img src=".github/assets/store-default.jpg" alt="The default mock.shop store: sneakers and apparel basics" width="100%"><br><sub><code>mock.shop</code> · the default</sub></td>
+    <td align="center"><img src=".github/assets/store-candles.jpg" alt="Amber & Aura, a candle store on mock.shop" width="100%"><br><sub><code>candles.mock.shop</code></sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src=".github/assets/store-coffee.jpg" alt="Sunbeam Brew Co., a coffee store on mock.shop" width="100%"><br><sub><code>coffee.mock.shop</code></sub></td>
+    <td align="center"><img src=".github/assets/store-keyboards.jpg" alt="ClickyCanvas, a mechanical keyboard store on mock.shop" width="100%"><br><sub><code>mechanical-keyboards.mock.shop</code></sub></td>
+  </tr>
+</table>
+
+<p><sub>Same project, four stores. The only difference between these screenshots is one line in <code>.env</code>.</sub></p>
+
+</div>
+
+<br>
+
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <h3>⚡ Zero setup</h3>
+      Clone, install, run. <a href="https://mock.shop">mock.shop</a> is a public Storefront API, so there's nothing to sign up for and no token to paste.
+    </td>
+    <td width="33%" valign="top">
+      <h3>🏪 100+ stores</h3>
+      Candles, coffee, pets, telescopes, typewriters. Pick the catalog that looks like what you're building and switch with one variable.
+    </td>
+    <td width="33%" valign="top">
+      <h3>🤖 Agent-ready</h3>
+      <code>AGENTS.md</code>, <code>llms.txt</code>, and Cursor rules already know how mock.shop works, so Claude Code, Cursor, and Copilot do too.
+    </td>
+  </tr>
+</table>
 
 ## Quickstart
 
 **Requirements:** Node.js 22 or 24.
-
-The canonical path is Shopify's scaffolder, which produces this same project:
-
-```bash
-npm create @shopify/hydrogen@latest -- --mock-shop
-```
-
-Or start from this repository:
-
-```bash
-npm create @shopify/hydrogen@latest -- --template Shopify/mock-shop-starter
-```
-
-Or clone it directly:
 
 ```bash
 git clone https://github.com/Shopify/mock-shop-starter.git my-store
@@ -30,25 +67,48 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000 and you're browsing the default mock.shop store: hoodies, t-shirts, sweatpants, and slides.
+Open http://localhost:3000. You're browsing the default mock.shop store: sneakers, hoodies, t-shirts, and slides.
 
-### Open in your browser
+<details>
+<summary>Prefer a scaffolder?</summary>
+<br>
 
-No local setup: [Open in StackBlitz](https://stackblitz.com/github/Shopify/mock-shop-starter) · [Open in CodeSandbox](https://codesandbox.io/s/github/Shopify/mock-shop-starter) · [Open in Bolt](https://bolt.new/github.com/Shopify/mock-shop-starter)
+Shopify's own scaffolder produces this same project in mock mode:
 
-<!-- Deploy with Vercel: GA Hydrogen targets Oxygen. Decision pending on linking Hydrogen's preview Next.js template here. -->
+```bash
+npm create @shopify/hydrogen@latest -- --mock-shop
+```
+
+Or point it at this repository:
+
+```bash
+npm create @shopify/hydrogen@latest -- --template Shopify/mock-shop-starter
+```
+
+</details>
 
 ## Pick a store
 
-mock.shop is a catalog of stores, not one store. Every store lives on its own host and serves the same Storefront API at `/api`. To build against one, set a single variable in `.env`:
+mock.shop isn't one store, it's a catalog of them. Every store lives on its own host and serves the same Storefront API at `/api`. To build against one, set a single variable in `.env` and restart the dev server:
 
 ```bash
 PUBLIC_STORE_DOMAIN=candles.mock.shop
 ```
 
-Leave `PUBLIC_STOREFRONT_API_TOKEN` empty. Hydrogen recognizes any mock.shop host and sends no token. Each store describes its own categories, collections, and product counts at `https://<store>.mock.shop/llms.txt`.
+Leave `PUBLIC_STOREFRONT_API_TOKEN` empty. Hydrogen recognizes any mock.shop host and sends no token.
 
-### Store directory
+**A few to try:**
+
+| Store | Host | What it sells |
+| --- | --- | --- |
+| Amber & Aura | `candles.mock.shop` | Handcrafted candles and home scents |
+| Sunbeam Brew Co. | `coffee.mock.shop` | Single-origin beans and brewing kits |
+| Paws and Whimsy | `pets.mock.shop` | Gear and accessories for pets |
+| ClickyCanvas | `mechanical-keyboards.mock.shop` | Custom keyboard kits and components |
+| StellarVista Optics | `telescopes-retail.mock.shop` | Telescopes and stargazing accessories |
+| Inkwell Echoes | `typewriters.mock.shop` | Restored vintage typewriters and ribbons |
+
+Each store describes its own categories, collections, and product counts at `https://<store>.mock.shop/llms.txt`. The whole directory is below, and it refreshes itself weekly.
 
 <!-- STORE_DIRECTORY:START -->
 119 stores, generated from [mock.shop/llms.txt](https://mock.shop/llms.txt) on 2026-09-08. Set `PUBLIC_STORE_DOMAIN` to the host to use a store.
@@ -181,18 +241,33 @@ Leave `PUBLIC_STOREFRONT_API_TOKEN` empty. Hydrogen recognizes any mock.shop hos
 </details>
 <!-- STORE_DIRECTORY:END -->
 
-## What mock.shop can and can't do
+## How it works
+
+Hydrogen talks to mock.shop exactly the way it talks to a real Shopify store, because mock.shop mirrors the Storefront API. A query you write today runs unchanged against your store tomorrow.
+
+```mermaid
+flowchart LR
+    app["Your Hydrogen storefront"]
+    mock["candles.mock.shop/api<br/>mock.shop, no token"]
+    real["your-store.myshopify.com<br/>Storefront API, real token"]
+    app -- "PUBLIC_STORE_DOMAIN" --> mock
+    app -. "npx shopify hydrogen link" .-> real
+```
+
+## What works, and what doesn't
 
 mock.shop is for building, not for selling.
 
-- Carts work, so you can build the full shopping flow. Checkout is mocked: no payment is taken and no order is placed.
-- The Customer Account API isn't available, so the header's **Sign in** link and the `/account` routes error until you point the project at a real store.
-- Products, prices, and inventory are fictional.
-- The API mirrors the Storefront API. A query written against mock.shop runs unchanged against a real store.
+| | |
+| --- | --- |
+| ✅ Products, collections, search, menus, images, prices | Everything the Storefront API serves, with realistic fictional data |
+| ✅ Carts | Add, update, and remove lines. Build the whole shopping flow |
+| 🎭 Checkout | Mocked. The cart hands off to a demo checkout page. No payment is taken and no order is placed |
+| ❌ Customer accounts | The Customer Account API isn't available, so **Sign in** and the `/account` routes error until you connect a real store |
 
 ## Connect a real store
 
-When you're ready to sell, link the project to your Shopify store and pull its credentials:
+When you're ready to sell, link the project to your Shopify store and pull its credentials. Nothing else changes.
 
 ```bash
 npx shopify hydrogen link
@@ -205,27 +280,41 @@ Then deploy to [Oxygen](https://shopify.dev/docs/storefronts/headless/hydrogen/d
 npx shopify hydrogen deploy
 ```
 
-## For coding agents
+## Built for coding agents
 
-Point your agent at [`llms.txt`](llms.txt) or [`AGENTS.md`](AGENTS.md). Both explain the store catalog, how to switch stores, and what mock.shop can't do. If you use the [Shopify AI Toolkit](https://shopify.dev/docs/apps/build/ai-toolkit), its Hydrogen and Storefront GraphQL instructions already point at mock.shop. The full guide is [About mock.shop](https://shopify.dev/docs/storefronts/headless/mock-shop) on shopify.dev.
+Point your agent at [`llms.txt`](llms.txt) or [`AGENTS.md`](AGENTS.md). Both explain the store catalog, how to switch stores, and what mock.shop can't do, so the agent queries real data instead of inventing products. If you use the [Shopify AI Toolkit](https://shopify.dev/docs/apps/build/ai-toolkit), its Hydrogen and Storefront GraphQL instructions already point at mock.shop.
+
+The full guide is [About mock.shop](https://shopify.dev/docs/storefronts/headless/mock-shop) on shopify.dev.
 
 ## What's inside
 
-This is Shopify's Hydrogen skeleton template, unchanged, plus a few files that teach it about mock.shop:
+Shopify's Hydrogen skeleton template, unchanged, plus a few files that teach it about mock.shop.
 
-- The skeleton: React Router, Hydrogen, Oxygen, Vite, Shopify CLI, ESLint, Prettier, GraphQL codegen, TypeScript, and a minimal set of routes and components.
-- `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/mock-shop.mdc`, and `llms.txt` for agents.
-- `.env.example` with the store selector.
-- `scripts/update-store-directory.mjs`, which regenerates the table above from mock.shop's directory.
+```
+├── app/                      Hydrogen skeleton: routes, components, GraphQL fragments
+├── AGENTS.md                 What agents need to know about mock.shop (CLAUDE.md points here)
+├── llms.txt                  The same, in the llms.txt convention
+├── .cursor/rules/            Cursor rule for mock.shop
+├── .env.example              SESSION_SECRET plus the PUBLIC_STORE_DOMAIN store selector
+└── scripts/
+    └── update-store-directory.mjs   Regenerates the store table from mock.shop/llms.txt
+```
+
+The skeleton itself: React Router 7, Hydrogen, Oxygen, Vite, Shopify CLI, TypeScript, ESLint, Prettier, and GraphQL codegen.
 
 ## Staying fresh
 
-A weekly job re-scaffolds the skeleton from the latest Hydrogen release and opens a pull request when anything drifted, and another refreshes the store directory. Galleries that link here always get a current starter.
+Two scheduled workflows keep this starter from going stale:
+
+- **Skeleton sync** re-scaffolds from the latest Hydrogen release every week and opens a pull request when anything drifted.
+- **Store directory** regenerates the table above from mock.shop's live directory.
+
+Galleries that link here always get a current starter.
 
 ## Contributing
 
-See [CONTRIBUTING.md](.github/CONTRIBUTING.md). Issues and pull requests are welcome.
+Issues and pull requests are welcome. See [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 ## License
 
-[MIT](LICENSE.md)
+[MIT](LICENSE.md) · Copyright 2026-present, Shopify Inc.
