@@ -34,7 +34,7 @@ jobs:
           node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json'));p.name='mock-shop-starter';p.scripts['update-stores']='node scripts/update-store-directory.mjs';fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n')"
           npm install --package-lock-only --ignore-scripts
       - name: Open a pull request if anything changed
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: chore/sync-hydrogen-skeleton
           title: "Sync with the latest Hydrogen skeleton"

@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 22
       - run: npm run update-stores
-      - uses: peter-evans/create-pull-request@v7
+      - uses: peter-evans/create-pull-request@v8
         with:
           branch: chore/refresh-store-directory
           title: "Refresh the mock.shop store directory"
