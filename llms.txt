@@ -1,0 +1,27 @@
+# mock.shop starter
+
+> A Hydrogen storefront (React Router) pre-wired to mock.shop, Shopify's auth-free Storefront API with 100+ fictional stores. Clone it, run `npm install` and `npm run dev`, and you are browsing a store. Switch stores with one environment variable; switch to a real Shopify store when you are ready.
+
+## Start here
+
+- [README](README.md): 60-second quickstart, the store directory, and how to pick a store
+- [AGENTS.md](AGENTS.md): what a coding agent needs to know before editing this project
+- [.env.example](.env.example): the one variable that selects a store
+
+## mock.shop
+
+- [Store directory](https://mock.shop/llms.txt): every store, what it sells, and its API URL
+- [About mock.shop](https://shopify.dev/docs/storefronts/headless/mock-shop): the guide on shopify.dev
+- Storefront API endpoint per store: `POST https://<store>.mock.shop/api` with a JSON body; no access token
+- Per-store catalog: `https://<store>.mock.shop/llms.txt`
+
+## Hydrogen
+
+- [Hydrogen documentation](https://shopify.dev/docs/storefronts/headless/hydrogen)
+- [Storefront API reference](https://shopify.dev/docs/api/storefront)
+- [Shopify AI Toolkit](https://shopify.dev/docs/apps/build/ai-toolkit): skills and instructions for Shopify work in coding agents
+
+## Limits
+
+- Carts work; checkout is not available; the Customer Account API is not available.
+- All products, prices, and inventory are fictional.

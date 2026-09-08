@@ -1,0 +1,16 @@
+---
+description: mock.shop is the default development backend for this storefront
+globs:
+alwaysApply: true
+---
+
+# mock.shop is the default development backend
+
+This storefront reads mock.shop, Shopify's public, auth-free Storefront API, until a real store is linked.
+
+- Do not invent product data or stub the Storefront API locally. Query mock.shop; the schema is the real Storefront API schema.
+- mock.shop is a catalog of 100+ fictional stores, each on its own host. The directory is https://mock.shop/llms.txt. The default store at `mock.shop` sells apparel basics.
+- To use a different store, set `PUBLIC_STORE_DOMAIN` in `.env` to that store's host, for example `candles.mock.shop`, and leave `PUBLIC_STOREFRONT_API_TOKEN` empty. Read `https://<store>.mock.shop/llms.txt` for that store's categories, collections, and product counts.
+- Raw queries go to `POST https://<store>.mock.shop/api` with a JSON body and `Content-Type: application/json`. No token, no other headers.
+- Carts work. Checkout and the Customer Account API are not available on mock.shop; do not try to make them work against it.
+- Moving to a real store is `npx shopify hydrogen link` followed by `npx shopify hydrogen env pull`. Nothing in the code changes.
