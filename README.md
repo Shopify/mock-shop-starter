@@ -1,48 +1,31 @@
-<div align="center">
+# mock.shop starter
 
-<h1>mock.shop starter</h1>
+**A Shopify Hydrogen storefront that runs the moment you clone it.** No store, no token, no account. It reads [mock.shop](https://mock.shop), a real Storefront API with more than 100 fictional catalogs to build against.
 
-<p>
-  <strong>A Shopify Hydrogen storefront that runs the moment you clone it.</strong><br>
-  No store. No token. No account. A real Storefront API with more than 100 fictional catalogs to build against.
-</p>
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md) [![Hydrogen 2026.4](https://img.shields.io/badge/Hydrogen-2026.4-95BF47?logo=shopify&logoColor=white)](https://shopify.dev/docs/storefronts/headless/hydrogen) ![Node 22 or 24](https://img.shields.io/badge/Node-22%20%7C%2024-339933?logo=node.js&logoColor=white)
 
-<p>
-  <a href="LICENSE.md"><img alt="MIT license" src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
-  <a href="https://shopify.dev/docs/storefronts/headless/hydrogen"><img alt="Hydrogen 2026.4" src="https://img.shields.io/badge/Hydrogen-2026.4-95BF47?logo=shopify&logoColor=white"></a>
-  <img alt="Node 22 or 24" src="https://img.shields.io/badge/Node-22%20%7C%2024-339933?logo=node.js&logoColor=white">
-</p>
-
-<p>
-  <a href="https://stackblitz.com/github/Shopify/mock-shop-starter"><img alt="Open in StackBlitz" src="https://img.shields.io/badge/Open%20in-StackBlitz-1269D3?logo=stackblitz&logoColor=white"></a>
-  <a href="https://codesandbox.io/s/github/Shopify/mock-shop-starter"><img alt="Open in CodeSandbox" src="https://img.shields.io/badge/Open%20in-CodeSandbox-151515?logo=codesandbox&logoColor=white"></a>
-  <a href="https://bolt.new/github.com/Shopify/mock-shop-starter"><img alt="Open in Bolt" src="https://img.shields.io/badge/Open%20in-Bolt-000000?logo=bolt&logoColor=white"></a>
-</p>
+[![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-1269D3?logo=stackblitz&logoColor=white)](https://stackblitz.com/github/Shopify/mock-shop-starter) [![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-151515?logo=codesandbox&logoColor=white)](https://codesandbox.io/s/github/Shopify/mock-shop-starter) [![Open in Bolt](https://img.shields.io/badge/Open%20in-Bolt-000000?logo=bolt&logoColor=white)](https://bolt.new/github.com/Shopify/mock-shop-starter)
 
 <!-- Deploy with Vercel: GA Hydrogen targets Oxygen. Decision pending on linking Hydrogen's preview Next.js template here. -->
 
 <table>
   <tr>
-    <td align="center"><img src=".github/assets/store-default.jpg" alt="The default mock.shop store: sneakers and apparel basics" width="100%"><br><sub><code>mock.shop</code> · the default</sub></td>
-    <td align="center"><img src=".github/assets/store-candles.jpg" alt="Amber & Aura, a candle store on mock.shop" width="100%"><br><sub><code>candles.mock.shop</code></sub></td>
+    <td width="50%"><img src=".github/assets/store-default.jpg" alt="Products page of the default mock.shop store: slides, sweatpants, t-shirts, and hoodies" width="100%"><br><sub><code>mock.shop</code> · the default</sub></td>
+    <td width="50%"><img src=".github/assets/store-pets.jpg" alt="Products page of Paws and Whimsy: pet beds and carriers" width="100%"><br><sub><code>pets.mock.shop</code></sub></td>
   </tr>
   <tr>
-    <td align="center"><img src=".github/assets/store-coffee.jpg" alt="Sunbeam Brew Co., a coffee store on mock.shop" width="100%"><br><sub><code>coffee.mock.shop</code></sub></td>
-    <td align="center"><img src=".github/assets/store-keyboards.jpg" alt="ClickyCanvas, a mechanical keyboard store on mock.shop" width="100%"><br><sub><code>mechanical-keyboards.mock.shop</code></sub></td>
+    <td width="50%"><img src=".github/assets/store-coffee.jpg" alt="Products page of Sunbeam Brew Co.: coffee bags, mugs, and pour-over gear" width="100%"><br><sub><code>coffee.mock.shop</code></sub></td>
+    <td width="50%"><img src=".github/assets/store-keyboards.jpg" alt="Products page of ClickyCanvas: keyboard frames, switches, and keycaps" width="100%"><br><sub><code>mechanical-keyboards.mock.shop</code></sub></td>
   </tr>
 </table>
 
-<p><sub>Same project, four stores. The only difference between these screenshots is one line in <code>.env</code>.</sub></p>
-
-</div>
-
-<br>
+Same project, four stores. The only difference between these screenshots is one line in `.env`.
 
 <table>
   <tr>
     <td width="33%" valign="top">
       <h3>⚡ Zero setup</h3>
-      Clone, install, run. <a href="https://mock.shop">mock.shop</a> is a public Storefront API, so there's nothing to sign up for and no token to paste.
+      Clone, install, run. mock.shop is a public Storefront API, so there's nothing to sign up for and no token to paste.
     </td>
     <td width="33%" valign="top">
       <h3>🏪 100+ stores</h3>
@@ -89,7 +72,7 @@ npm create @shopify/hydrogen@latest -- --template Shopify/mock-shop-starter
 
 ## Pick a store
 
-mock.shop isn't one store, it's a catalog of them. Every store lives on its own host and serves the same Storefront API at `/api`. To build against one, set a single variable in `.env` and restart the dev server:
+mock.shop isn't one store, it's a catalog of them. Every store lives on its own host and serves the same Storefront API at `/api`, and because mock.shop mirrors the Storefront API, a query you write against it runs unchanged against a real store. To build against one, set a single variable in `.env` and restart the dev server:
 
 ```bash
 PUBLIC_STORE_DOMAIN=candles.mock.shop
@@ -240,19 +223,6 @@ Each store describes its own categories, collections, and product counts at `htt
 
 </details>
 <!-- STORE_DIRECTORY:END -->
-
-## How it works
-
-Hydrogen talks to mock.shop exactly the way it talks to a real Shopify store, because mock.shop mirrors the Storefront API. A query you write today runs unchanged against your store tomorrow.
-
-```mermaid
-flowchart LR
-    app["Your Hydrogen storefront"]
-    mock["candles.mock.shop/api<br/>mock.shop, no token"]
-    real["your-store.myshopify.com<br/>Storefront API, real token"]
-    app -- "PUBLIC_STORE_DOMAIN" --> mock
-    app -. "npx shopify hydrogen link" .-> real
-```
 
 ## What works, and what doesn't
 
