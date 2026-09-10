@@ -1,0 +1,5 @@
+{
+  "installDependencies": true,
+  "startCommand": "cp -n .env.example .env; npm run dev -- --host --port 3000",
+  "env": {}
+}

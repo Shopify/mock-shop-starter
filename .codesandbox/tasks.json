@@ -1,0 +1,18 @@
+{
+  "$schema": "https://codesandbox.io/schemas/tasks.json",
+  "setupTasks": [
+    { "name": "Install dependencies", "command": "npm install" },
+    { "name": "Create .env from .env.example", "command": "cp -n .env.example .env || true" }
+  ],
+  "tasks": {
+    "dev": {
+      "name": "Dev server",
+      "command": "npm run dev -- --host --port 3000",
+      "runAtStart": true,
+      "preview": { "port": 3000 },
+      "restartOn": { "files": [".env"], "branch": false, "resume": false }
+    },
+    "build": { "name": "Build", "command": "npm run build" },
+    "lint": { "name": "Lint", "command": "npm run lint" }
+  }
+}
