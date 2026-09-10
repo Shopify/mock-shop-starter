@@ -94,7 +94,7 @@ Leave `PUBLIC_STOREFRONT_API_TOKEN` empty. Hydrogen recognizes any mock.shop hos
 Each store describes its own categories, collections, and product counts at `https://<store>.mock.shop/llms.txt`. The whole directory is below, and it refreshes itself weekly.
 
 <!-- STORE_DIRECTORY:START -->
-119 stores, generated from [mock.shop/llms.txt](https://mock.shop/llms.txt) on 2026-09-08. Set `PUBLIC_STORE_DOMAIN` to the host to use a store.
+119 stores, generated from [mock.shop/llms.txt](https://mock.shop/llms.txt) on 2026-09-10. Set `PUBLIC_STORE_DOMAIN` to the host to use a store.
 
 <details>
 <summary>Show all 119 stores</summary>
