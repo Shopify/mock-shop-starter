@@ -33,6 +33,7 @@ jobs:
             --exclude .codesandbox --exclude .stackblitzrc --exclude .devcontainer \
             /tmp/fresh/ ./
           node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json'));p.name='mock-shop-starter';p.scripts['update-stores']='node scripts/update-store-directory.mjs';fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n')"
+          node scripts/patch-skeleton.mjs
           npm install --package-lock-only --ignore-scripts
       - name: Open a pull request if anything changed
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8

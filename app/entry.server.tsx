@@ -15,6 +15,21 @@ export default async function handleRequest(
   context: HydrogenRouterContextProvider,
 ) {
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+    // sandbox-preview-csp: Hydrogen's default `frame-ancestors 'none'` blocks the embedded
+    // preview panes in CodeSandbox, StackBlitz, and Bolt. Allow those hosts to frame the DEV
+    // server only; production builds keep the default.
+    ...(import.meta.env.DEV
+      ? {
+          frameAncestors: [
+            "'self'",
+            'https://codesandbox.io',
+            'https://*.csb.app',
+            'https://stackblitz.com',
+            'https://*.stackblitz.io',
+            'https://bolt.new',
+          ],
+        }
+      : {}),
     shop: {
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
