@@ -1,7 +1,10 @@
 {
   "$schema": "https://codesandbox.io/schemas/tasks.json",
   "setupTasks": [
-    { "name": "Install dependencies", "command": "npm install" },
+    {
+      "name": "Install dependencies",
+      "command": "npm ci --no-audit --no-fund || (rm -rf node_modules && npm install --no-audit --no-fund)"
+    },
     { "name": "Create .env from .env.example", "command": "cp -n .env.example .env || true" }
   ],
   "tasks": {
