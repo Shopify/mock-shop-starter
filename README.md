@@ -4,7 +4,7 @@
 
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md) [![Hydrogen 2026.4](https://img.shields.io/badge/Hydrogen-2026.4-95BF47?logo=shopify&logoColor=white)](https://shopify.dev/docs/storefronts/headless/hydrogen) ![Node 22 or 24](https://img.shields.io/badge/Node-22%20%7C%2024-339933?logo=node.js&logoColor=white)
 
-[![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-1269D3?logo=stackblitz&logoColor=white)](https://stackblitz.com/github/Shopify/mock-shop-starter) [![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-151515?logo=codesandbox&logoColor=white)](https://codesandbox.io/p/github/Shopify/mock-shop-starter) [![Open in Bolt](https://img.shields.io/badge/Open%20in-Bolt-000000?logo=bolt&logoColor=white)](https://bolt.new/github.com/Shopify/mock-shop-starter)
+[![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-1269D3?logo=stackblitz&logoColor=white)](https://stackblitz.com/github/Shopify/mock-shop-starter) [![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-151515?logo=codesandbox&logoColor=white)](https://codesandbox.io/s/github/Shopify/mock-shop-starter) [![Open in Bolt](https://img.shields.io/badge/Open%20in-Bolt-000000?logo=bolt&logoColor=white)](https://bolt.new/github.com/Shopify/mock-shop-starter)
 
 <!-- Deploy with Vercel: GA Hydrogen targets Oxygen. Decision pending on linking Hydrogen's preview Next.js template here. -->
 
