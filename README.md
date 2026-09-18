@@ -1,6 +1,6 @@
 # mock.shop starter
 
-**A Shopify Hydrogen storefront that runs the moment you clone it.** No store, no token, no account. It reads [mock.shop](https://mock.shop), a real Storefront API with more than 100 fictional catalogs to build against.
+**A Shopify Hydrogen storefront that runs the moment you clone it.** No store, no token, no account. It reads [mock.shop](https://mock.shop/?utm_source=docs), a real Storefront API with more than 100 fictional catalogs to build against.
 
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md) [![Hydrogen 2026.4](https://img.shields.io/badge/Hydrogen-2026.4-95BF47?logo=shopify&logoColor=white)](https://shopify.dev/docs/storefronts/headless/hydrogen) ![Node 22 or 24](https://img.shields.io/badge/Node-22%20%7C%2024-339933?logo=node.js&logoColor=white)
 
@@ -94,7 +94,7 @@ Leave `PUBLIC_STOREFRONT_API_TOKEN` empty. Hydrogen recognizes any mock.shop hos
 Each store describes its own categories, collections, and product counts at `https://<store>.mock.shop/llms.txt`. The whole directory is below, and it refreshes itself weekly.
 
 <!-- STORE_DIRECTORY:START -->
-119 stores, generated from [mock.shop/llms.txt](https://mock.shop/llms.txt) on 2026-09-08. Set `PUBLIC_STORE_DOMAIN` to the host to use a store.
+119 stores, generated from [mock.shop/llms.txt](https://mock.shop/llms.txt?utm_source=docs) on 2026-09-08. Set `PUBLIC_STORE_DOMAIN` to the host to use a store.
 
 <details>
 <summary>Show all 119 stores</summary>

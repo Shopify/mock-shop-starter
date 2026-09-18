@@ -24,7 +24,7 @@ if (stores.length < 10) throw new Error(`Only parsed ${stores.length} stores fro
 const esc = (s) => s.replace(/\|/g, "\\|");
 const rows = stores.map((s) => `| ${esc(s.name)} | \`${s.host}\` | ${esc(s.summary)} | ${esc(s.cats)} |`);
 const table = [
-  `${stores.length} stores, generated from [mock.shop/llms.txt](${SOURCE}) on ${new Date().toISOString().slice(0, 10)}. Set \`PUBLIC_STORE_DOMAIN\` to the host to use a store.`,
+  `${stores.length} stores, generated from [mock.shop/llms.txt](${SOURCE}?utm_source=docs) on ${new Date().toISOString().slice(0, 10)}. Set \`PUBLIC_STORE_DOMAIN\` to the host to use a store.`,
   "",
   "<details>",
   `<summary>Show all ${stores.length} stores</summary>`,
