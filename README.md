@@ -94,14 +94,14 @@ Leave `PUBLIC_STOREFRONT_API_TOKEN` empty. Hydrogen recognizes any mock.shop hos
 Each store describes its own categories, collections, and product counts at `https://<store>.mock.shop/llms.txt`. The whole directory is below, and it refreshes itself weekly.
 
 <!-- STORE_DIRECTORY:START -->
-119 stores, generated from [mock.shop/llms.txt](https://mock.shop/llms.txt?utm_source=docs) on 2026-09-08. Set `PUBLIC_STORE_DOMAIN` to the host to use a store.
+114 stores, generated from [mock.shop/llms.txt](https://mock.shop/llms.txt?utm_source=docs) on 2026-09-28. Set `PUBLIC_STORE_DOMAIN` to the host to use a store.
 
 <details>
-<summary>Show all 119 stores</summary>
+<summary>Show all 114 stores</summary>
 
 | Store | Host | What it sells | Categories |
 | --- | --- | --- | --- |
-| Mock.shop (default) | `mock.shop` | High quality commerce data for your storefront | Accessories, Bottoms, Featured, Men, Shoes, Tops, Unisex, Women |
+| Mock.shop | `demostore.mock.shop` | High quality commerce data for your storefront | Accessories, Bottoms, Featured, Men, Shoes, Tops, Unisex, Women. Publishes its look |
 | Evergreen Echoes | `3dpinecones.mock.shop` | We craft exquisite, 3D-printed pinecones that capture the timeless beauty of nature for your home decor | Candle Holders, Garden Sculptures, Potpourri, Seasonal & Holiday Decorations, Window Valances & Cornices, Wreaths & Garlands, Artificial Flora, Artwork |
 | VigorVibe Active | `activewear-dropship.mock.shop` | High-performance activewear and sleek gear designed to help you crush your workout with confidence and vibrant flair | Activewear Tops, Leggings, Sports Bras, Activewear Vests & Jackets, Belt Bags |
 | Elysian Thread | `apparel.mock.shop` | Curated timeless apparel featuring natural fabrics and clean tailoring for the modern woman's sophisticated wardrobe | Blouses, Loungewear Sets, Outfit Sets, Trousers, Cardigans, Blazers, Clothing Tops, Coats & Jackets |
@@ -215,11 +215,6 @@ Each store describes its own categories, collections, and product counts at `htt
 | Velocis Wristwear | `watches-dropship.mock.shop` | Curated collection of versatile timepieces and custom straps designed to elevate your daily style with modern flair | Bracelets, Watch Bands, Watches, Jewelry Sets, Watch Storage Boxes & Rolls |
 | Vibrant Pulse Wellness | `wellness-digital.mock.shop` | Empowering fitness journeys through inclusive strength, mobility, and habit-building programs for every body | Videos, E-Books |
 | Zenith Pulse Wellness | `wellness-dropship.mock.shop` | Curated ergonomic tools and recovery essentials designed to help you find balance and vitality in every moment | Manual Massage Tools, Sports Water Bottles, Supports & Braces, Positional Sleep Aids, Ultrasonic Diffusers |
-| Shopify Hydrogen | `shopify.dev` | React-based framework for building custom Shopify storefronts on the Storefront API |  |
-| Shopify Oxygen | `shopify.dev` | Shopify's global edge hosting for deploying Hydrogen storefronts for free |  |
-| Shopify Storefront API | `shopify.dev` | The GraphQL commerce API that mock.shop mirrors, with the full schema and reference |  |
-| Shopify AI Toolkit | `shopify.dev` | The agent plugin for Claude Code, Codex, Cursor, VS Code, and others |  |
-| Create a preview store | `shopify.dev` | With the toolkit installed, `shopify store create preview` opens a free store the merchant can build on right away and claim later, with no signup, browser flow, or credit card |  |
 
 </details>
 <!-- STORE_DIRECTORY:END -->
