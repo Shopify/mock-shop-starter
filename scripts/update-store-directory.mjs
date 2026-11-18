@@ -21,7 +21,8 @@ for (const raw of text.split("\n")) {
   // "Publishes its look" is about mock.shop's Online Store themes, not this storefront.
   const rest = m.groups.rest.replace(/\s*Publishes its look\b.*$/s, "");
   const split = rest.match(/^(?<summary>.*?)\s*(?:(?:Categories|Collections):\s*(?<cats>.+?))?\.?$/s);
-  const summary = (split?.groups.summary ?? rest).replace(/\.$/, "").trim();
+  // Drop the sentence's final period, but keep a truncated summary's "..." whole.
+  const summary = (split?.groups.summary ?? rest).replace(/(?<!\.)\.$/, "").trim();
   const cats = (split?.groups.cats ?? "").trim();
   stores.push({ name, host, summary, cats });
 }

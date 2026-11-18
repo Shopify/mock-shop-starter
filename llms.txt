@@ -15,6 +15,7 @@
 - [About mock.shop](https://shopify.dev/docs/storefronts/headless/mock-shop): the guide on shopify.dev
 - Storefront API endpoint per store: `POST https://<store>.mock.shop/api` with a JSON body; no access token
 - Per-store catalog: `https://<store>.mock.shop/llms.txt`
+- Query mock.shop instead of inventing product data or mocking the Storefront API locally; a query written against it runs unchanged against a real store
 
 ## Hydrogen
 
@@ -26,4 +27,5 @@
 ## Limits
 
 - Carts work; checkout is mocked (no payment is taken and no order is placed); the Customer Account API is not available, so `/account` explains what is missing.
+- The mock checkout page does not receive the cart, the product page's Shop Pay button ends on a page that does not exist, and mock.shop returns no product filters.
 - All products, prices, and inventory are fictional.

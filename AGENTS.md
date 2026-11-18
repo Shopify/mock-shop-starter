@@ -12,3 +12,5 @@ Until a store is connected, this project reads [mock.shop](https://mock.shop): a
 - To build against a different store, set `PUBLIC_STORE_DOMAIN` in `.env` to that store's host (for example `pets.mock.shop`) and leave `PRIVATE_STOREFRONT_API_TOKEN` empty. Each store describes its own catalog at `https://<store>.mock.shop/llms.txt`.
 - Carts work; checkout is mocked (no payment, no real order), and the Customer Account API isn't available.
 - To connect a real store, run `npx shopify hydrogen link`, then `npx shopify hydrogen env pull` to pull its environment into `.env`. Fill in any secret values the command reports it couldn't pull. On Oxygen, a linked storefront injects `PUBLIC_STORE_DOMAIN`, `PUBLIC_STOREFRONT_ID`, and `PRIVATE_STOREFRONT_API_TOKEN` for you. `PUBLIC_STOREFRONT_ID` is optional for Storefront API access; it enables Hydrogen analytics, and no other analytics IDs are needed.
+
+Query mock.shop instead of inventing product data or mocking the Storefront API locally. A query written against mock.shop runs unchanged against a real store. The full guide is at https://shopify.dev/docs/storefronts/headless/mock-shop.
