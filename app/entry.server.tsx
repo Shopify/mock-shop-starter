@@ -1,51 +1,51 @@
-import {ServerRouter} from 'react-router';
-import {isbot} from 'isbot';
-import {renderToReadableStream} from 'react-dom/server';
-import {
-  createContentSecurityPolicy,
-  type HydrogenRouterContextProvider,
-} from '@shopify/hydrogen';
-import type {EntryContext} from 'react-router';
+import { createContentSecurityPolicy } from "@shopify/hydrogen";
+import { isbot } from "isbot";
+import { renderToReadableStream } from "react-dom/server";
+import { ServerRouter, type EntryContext, type RouterContextProvider } from "react-router";
+
+import { NonceProvider } from "~/lib/csp";
+import { envContext } from "~/lib/env";
+import { getMockShopDomain, getStoreDomain, shouldUseMockShop } from "~/lib/shop";
 
 export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   reactRouterContext: EntryContext,
-  context: HydrogenRouterContextProvider,
+  context: RouterContextProvider,
 ) {
-  const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+  const env = context.get(envContext);
+
+  const csp = createContentSecurityPolicy({
     // sandbox-preview-csp: Hydrogen's default `frame-ancestors 'none'` blocks the embedded
     // preview panes in CodeSandbox, StackBlitz, and Bolt. Allow those hosts to frame the DEV
     // server only; production builds keep the default.
     ...(import.meta.env.DEV
       ? {
-          frameAncestors: [
-            "'self'",
-            'https://codesandbox.io',
-            'https://*.csb.app',
-            'https://stackblitz.com',
-            'https://*.stackblitz.io',
-            'https://bolt.new',
-          ],
+          directives: {
+            frameAncestors: [
+              "'self'",
+              "https://codesandbox.io",
+              "https://*.csb.app",
+              "https://stackblitz.com",
+              "https://*.stackblitz.io",
+              "https://bolt.new",
+            ],
+          },
         }
       : {}),
     shop: {
-      checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
-      storeDomain: context.env.PUBLIC_STORE_DOMAIN,
+      storeDomain: shouldUseMockShop(env) ? getMockShopDomain(env) : getStoreDomain(env),
+      checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
     },
   });
 
   const body = await renderToReadableStream(
-    <NonceProvider>
-      <ServerRouter
-        context={reactRouterContext}
-        url={request.url}
-        nonce={nonce}
-      />
+    <NonceProvider value={csp.nonce}>
+      <ServerRouter context={reactRouterContext} url={request.url} nonce={csp.nonce} />
     </NonceProvider>,
     {
-      nonce,
+      nonce: csp.nonce,
       signal: request.signal,
       onError(error) {
         console.error(error);
@@ -54,12 +54,12 @@ export default async function handleRequest(
     },
   );
 
-  if (isbot(request.headers.get('user-agent'))) {
+  if (isbot(request.headers.get("user-agent"))) {
     await body.allReady;
   }
 
-  responseHeaders.set('Content-Type', 'text/html');
-  responseHeaders.set('Content-Security-Policy', header);
+  responseHeaders.set("Content-Type", "text/html");
+  csp.applyResponseHeaders(responseHeaders);
 
   return new Response(body, {
     headers: responseHeaders,

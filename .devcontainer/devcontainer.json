@@ -1,6 +1,6 @@
 {
   "name": "mock.shop starter",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
-  "forwardPorts": [3000],
-  "portsAttributes": { "3000": { "label": "Storefront", "onAutoForward": "openPreview" } }
+  "forwardPorts": [5173],
+  "portsAttributes": { "5173": { "label": "Storefront", "onAutoForward": "openPreview" } }
 }

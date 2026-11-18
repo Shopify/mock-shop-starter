@@ -16,6 +16,6 @@
       "restartOn": { "files": [".env"], "branch": false, "resume": false }
     },
     "build": { "name": "Build", "command": "npm run build" },
-    "lint": { "name": "Lint", "command": "npm run lint" }
+    "typecheck": { "name": "Typecheck", "command": "npm run typecheck" }
   }
 }

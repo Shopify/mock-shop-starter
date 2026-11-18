@@ -1,7 +1,7 @@
-name: Sync with the latest Hydrogen skeleton
+name: Sync with the latest Hydrogen template
 
-# Re-scaffolds the Hydrogen skeleton from the latest release and opens a PR when
-# anything the skeleton owns has drifted, so galleries never showcase a stale starter.
+# Re-downloads Hydrogen's published React Router template every week and opens a PR when
+# anything the template owns has drifted, so galleries never showcase a stale starter.
 on:
   schedule:
     - cron: "17 9 * * 1"
@@ -19,28 +19,34 @@ jobs:
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version: 22
-      - name: Scaffold the latest skeleton
+      - name: Download the latest template
         run: |
-          npm create @shopify/hydrogen@latest -- --quickstart --language ts --path /tmp/fresh --no-install-deps --no-shortcut
-          rm -rf /tmp/fresh/.git
-      - name: Copy skeleton-owned files over the starter
+          # The tarball `npx @shopify/hydrogen setup` scaffolds from: Hydrogen's dist branch
+          # carries the React Router template as published with the latest release.
+          curl -fsSL -o /tmp/hydrogen-dist.tar.gz https://codeload.github.com/Shopify/hydrogen/tar.gz/dist
+          mkdir -p /tmp/fresh
+          tar -xzf /tmp/hydrogen-dist.tar.gz --strip-components=3 -C /tmp/fresh hydrogen-dist/templates/react-router/
+      - name: Copy template-owned files over the starter
         run: |
-          # Everything the skeleton produces is skeleton-owned except the files this repo adds or rewrites.
+          # Everything the template ships is template-owned, including its agent skills, AGENTS.md,
+          # .env.example, and lockfile, except the files this repo adds or rewrites. The leading
+          # slash anchors each pattern to the repository root, so a file with one of these names
+          # deeper in the template (a skill's scripts/ or README.md, say) still syncs.
           rsync -a --delete \
-            --exclude README.md --exclude AGENTS.md --exclude CLAUDE.md --exclude llms.txt \
-            --exclude .env --exclude .env.example --exclude LICENSE.md --exclude package-lock.json \
-            --exclude .github --exclude scripts --exclude .cursor/rules/mock-shop.mdc --exclude .git \
-            --exclude .codesandbox --exclude .stackblitzrc --exclude .devcontainer \
+            --exclude /README.md --exclude /llms.txt --exclude /LICENSE --exclude /LICENSE.md \
+            --exclude /.env --exclude /.github --exclude /scripts --exclude /.cursor/rules/mock-shop.mdc \
+            --exclude /.codesandbox --exclude /.stackblitzrc --exclude /.devcontainer --exclude /.git \
             /tmp/fresh/ ./
-          node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json'));p.name='mock-shop-starter';p.scripts['update-stores']='node scripts/update-store-directory.mjs';fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n')"
-          node scripts/patch-skeleton.mjs
-          npm install --package-lock-only --ignore-scripts
+          # Restores this repo's package name and re-applies its edits to template files. The
+          # lockfile is the template's own, so nothing is installed here: a different npm
+          # version would only rewrite it.
+          node scripts/patch-template.mjs
       - name: Open a pull request if anything changed
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
         with:
-          branch: chore/sync-hydrogen-skeleton
-          title: "Sync with the latest Hydrogen skeleton"
-          commit-message: "Sync with the latest Hydrogen skeleton"
+          branch: chore/sync-hydrogen-template
+          title: "Sync with the latest Hydrogen template"
+          commit-message: "Sync with the latest Hydrogen template"
           body: |
-            Automated re-scaffold from `npm create @shopify/hydrogen@latest`. Review the diff, run it locally, and merge to keep the starter current.
+            Automated re-scaffold from Hydrogen's published React Router template, the same tarball `npx @shopify/hydrogen setup` uses. Review the diff, run it locally, and merge to keep the starter current.
           labels: dependencies

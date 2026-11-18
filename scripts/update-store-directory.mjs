@@ -9,13 +9,20 @@ const LINE = /^- \[(?<name>[^\]]+)\]\((?<url>https?:\/\/[^)]+)\):\s*(?<rest>.+)$
 
 const text = await (await fetch(SOURCE)).text();
 const stores = [];
+const seen = new Set();
 for (const raw of text.split("\n")) {
   const m = raw.match(LINE);
   if (!m) continue;
-  const { name, url, rest } = m.groups;
+  const { name, url } = m.groups;
   const host = new URL(url).host;
+  // Only mock.shop stores belong in the table, and llms.txt lists a featured store twice.
+  if (!/(^|\.)mock\.shop$/.test(host) || seen.has(host)) continue;
+  seen.add(host);
+  // "Publishes its look" is about mock.shop's Online Store themes, not this storefront.
+  const rest = m.groups.rest.replace(/\s*Publishes its look\b.*$/s, "");
   const split = rest.match(/^(?<summary>.*?)\s*(?:(?:Categories|Collections):\s*(?<cats>.+?))?\.?$/s);
-  const summary = (split?.groups.summary ?? rest).replace(/\.$/, "").trim();
+  // Drop the sentence's final period, but keep a truncated summary's "..." whole.
+  const summary = (split?.groups.summary ?? rest).replace(/(?<!\.)\.$/, "").trim();
   const cats = (split?.groups.cats ?? "").trim();
   stores.push({ name, host, summary, cats });
 }
