@@ -1,12 +1,13 @@
 # mock.shop starter
 
-> A Hydrogen storefront (React Router) pre-wired to mock.shop, Shopify's auth-free Storefront API with 100+ fictional stores. Clone it, run `npm install` and `npm run dev`, and you are browsing a store. Switch stores with one environment variable; switch to a real Shopify store when you are ready.
+> A Hydrogen storefront (Shopify's React Router template, Hydrogen 2026.10) pre-wired to mock.shop, Shopify's auth-free Storefront API with 100+ fictional stores. Clone it, run `npm install` and `npm run dev`, and you are browsing a store. Switch stores with one environment variable; switch to a real Shopify store when you are ready.
 
 ## Start here
 
-- [README](README.md): 60-second quickstart, the store directory, and how to pick a store
+- [README](README.md): quickstart, the store directory, and how to pick a store
 - [AGENTS.md](AGENTS.md): what a coding agent needs to know before editing this project
-- [.env.example](.env.example): the one variable that selects a store
+- [.env.example](.env.example): `PUBLIC_STORE_DOMAIN` selects a store; leave `PRIVATE_STOREFRONT_API_TOKEN` empty for mock.shop
+- Hydrogen agent skills: `.claude/skills/` and `.agents/skills/`, matched to the installed Hydrogen version
 
 ## mock.shop
 
@@ -17,11 +18,12 @@
 
 ## Hydrogen
 
-- [Hydrogen documentation](https://shopify.dev/docs/storefronts/headless/hydrogen)
+- [Hydrogen documentation](https://shopify.dev/docs/storefronts/hydrogen)
 - [Storefront API reference](https://shopify.dev/docs/api/storefront)
-- [Shopify AI Toolkit](https://shopify.dev/docs/apps/build/ai-toolkit): skills and instructions for Shopify work in coding agents
+- [Deploy to Oxygen](https://shopify.dev/docs/storefronts/hydrogen/deploy/oxygen): where this template deploys
+- [Shopify AI Toolkit](https://shopify.dev/docs/api/ai-toolkit): skills and instructions for Shopify work in coding agents
 
 ## Limits
 
-- Carts work; checkout is mocked (no payment is taken and no order is placed); the Customer Account API is not available.
+- Carts work; checkout is mocked (no payment is taken and no order is placed); the Customer Account API is not available, so `/account` explains what is missing.
 - All products, prices, and inventory are fictional.

@@ -1,17 +1,16 @@
-import {fileURLToPath} from 'node:url';
-import {defineConfig} from 'vite';
-import {hydrogen} from '@shopify/hydrogen/vite';
-import {oxygen} from '@shopify/mini-oxygen/vite';
-import {reactRouter} from '@react-router/dev/vite';
+import { reactRouter } from "@react-router/dev/vite";
+import { localHttps } from "@shopify/hydrogen/vite";
+import { oxygen } from "@shopify/mini-oxygen/vite";
+import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from "vite";
+
+const oxygenPlugins = oxygen();
+const enabled = process.env.npm_lifecycle_event === "dev:https";
+const httpsOptions = { enabled };
 
 export default defineConfig({
-  plugins: [hydrogen(), oxygen(), reactRouter()],
+  plugins: [localHttps(httpsOptions), tailwindcss(), ...oxygenPlugins, reactRouter()],
   resolve: {
-    alias: {
-      // Vite's native tsconfig path resolver does not cover JavaScript
-      // projects that use jsconfig.json, so define Hydrogen's app alias here.
-      '~': fileURLToPath(new URL('./app', import.meta.url)),
-    },
     tsconfigPaths: true,
   },
   build: {
@@ -32,13 +31,18 @@ export default defineConfig({
        * @see https://vitejs.dev/config/dep-optimization-options
        */
       include: [
-        'react-router > set-cookie-parser',
-        'react-router > cookie',
-        'react-router',
+        "react",
+        "react/jsx-runtime",
+        "react/jsx-dev-runtime",
+        "react-dom",
+        "react-dom/server",
+        "react-router > set-cookie-parser",
+        "react-router > cookie",
+        "react-router",
       ],
     },
   },
   server: {
-    allowedHosts: ['.tryhydrogen.dev'],
+    allowedHosts: [".tryhydrogen.dev"],
   },
 });
